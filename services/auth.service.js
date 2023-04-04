@@ -34,7 +34,7 @@ exports.getGoogleConsentUrl = () => {
 };
 
 // get access token
-getGoogleAccessToken = async (code) => {
+const getGoogleAccessToken = async (code) => {
   const url = formatUrl("https://oauth2.googleapis.com/token", {
     code,
     client_id: process.env.GOOGLE_CLIENT_ID,
@@ -79,7 +79,7 @@ exports.getGithubConsentUrl = () => {
 };
 
 // get access token
-getGithubAccessToken = async (code) => {
+const getGithubAccessToken = async (code) => {
   const url = formatUrl("https://github.com/login/oauth/access_token", {
     client_id: process.env.GITHUG_CLIENT_ID,
     client_secret: process.env.GITHUB_CLIENT_SECRET,
