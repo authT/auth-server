@@ -5,7 +5,7 @@ exports.signToken = (data) => {
 };
 
 exports.generateUserToken = (user) => {
-  return this.signToken({
+  return signToken({
     username: user.username,
     email: user.email,
     fullname: user.fullname,
