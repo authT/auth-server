@@ -11,10 +11,14 @@ const { generateUserToken } = require("../services/jwt.service");
 const { findAndCreateUser } = require("../services/user.service");
 
 exports.github = async (req, res) => {
+  if (req.query.redirect) {
+    req.session.client = req.query.redirect;
+  }
   if (req.query.code) {
     try {
       const user = await getGithubUser(req.query.code);
-      return res.send(user);
+      const token = generateUserToken(user);
+      return res.redirect(`${req.session.client}?token=${token}`);
     } catch (error) {
       return res.status(404).send(error.message);
     }
@@ -24,10 +28,14 @@ exports.github = async (req, res) => {
 };
 
 exports.google = async (req, res) => {
+  if (req.query.redirect) {
+    req.session.client = req.query.redirect;
+  }
   if (req.query.code) {
     try {
       const user = await getGoogleUser(req.query.code);
-      return res.send(user);
+      const token = generateUserToken(user);
+      return res.redirect(`${req.session.client}?token=${token}`);
     } catch (error) {
       return res.status(404).send(error.message);
     }
