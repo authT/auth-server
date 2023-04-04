@@ -1,8 +1,10 @@
 const jwt = require("jsonwebtoken");
 
-exports.signToken = (data) => {
+const signToken = (data) => {
   return jwt.sign(data, process.env.PRIVATE_KEY);
 };
+
+exports.signToken = signToken;
 
 exports.generateUserToken = (user) => {
   return signToken({
